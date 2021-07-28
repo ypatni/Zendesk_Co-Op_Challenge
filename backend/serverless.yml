@@ -1,0 +1,22 @@
+service: zendesk-backend
+
+provider:
+  name: aws
+  runtime: python3.7
+
+
+functions:
+  getTickets:
+    handler: handler.get_tickets
+    events:
+     - http:
+         path: tickets
+         method: post
+         cors: true
+  getTicket:
+    handler: handler.get_ticket
+    events:
+     - http:
+         path: tickets/{id}
+         method: get
+         cors: true
