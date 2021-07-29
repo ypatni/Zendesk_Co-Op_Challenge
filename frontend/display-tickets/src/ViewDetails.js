@@ -12,12 +12,11 @@ class ViewDetails extends Component {
     this.state = {
       isLoaded: true,
       error: null,
-      item_title: '',
-      item_id: '',
-      item_description: '',
-      item_org_id: '',
-      assignee_id: '',
-      requester_id: '',
+      itemID: '',
+      itemDescription: '',
+      assigneeID: '',
+      requesterID: '',
+      ticketFormID: '',
       location: props.match,
     };
     //console.log(this.state.location.state.items.id);
@@ -44,10 +43,11 @@ class ViewDetails extends Component {
           else{
             this.setState({
               isLoaded: true,
-              item_description: result.ticket.description,
-              item_id: result.ticket.id,
-              assignee_id: result.ticket.assignee_id,
-              requester_id: result.ticket.requester_id
+              itemDescription: result.ticket.description,
+              itemID: result.ticket.id,
+              assigneeID: result.ticket.assignee_id,
+              requesterID: result.ticket.requester_id,
+              ticketFormID: result.ticket.ticket_form_id,
             });
           }
         },
@@ -65,32 +65,44 @@ class ViewDetails extends Component {
       <>
       <h1 className='item-center'>Ticket Information</h1>
         <div
-          className=" item-center body-item__description"
+          className="item-center"
+          style={{fontSize: '1.1em', marginBottom: '2px'}}
         >
-          <h2>
+          <h3 >
             {" "}
-            <strong>I.D. : </strong> {this.state.item_id}
-          </h2>
+            <strong>I.D. : </strong> {this.state.itemID}
+          </h3>
         </div>
         <div
-          className="body-item__description item-center"
+          className="item-center"
+          style={{fontSize: '1.1em', marginBottom: '2px'}}
         >
-          <h2>
+          <h3>
             {" "}
-            <strong>Requester ID : </strong> {this.state.requester_id}
-          </h2>
+            <strong>Requester ID : </strong> {this.state.requesterID}
+          </h3>
         </div>
         <div
-          className="body-item__description item-center"
+          className="item-center"
+          style={{fontSize: '1.1em', marginBottom: '2px'}}
         >
-          <h2>
+          <h3>
             {" "}
-            <strong>Assignee ID : </strong> {this.state.assignee_id}
-          </h2>
+            <strong>Assignee ID : </strong> {this.state.assigneeID}
+          </h3>
+        </div>
+        <div
+          className="item-center"
+          style={{fontSize: '1.1em', marginBottom: '2px'}}
+        >
+          <h3>
+            {" "}
+            <strong>Ticket Form ID : </strong> {this.state.ticketFormID}
+          </h3>
         </div>
         <div className = 'item-center description-padding' >
           <h3 style={{  justifyContent: 'center', fontWeight: 500 }}>
-            <strong style={{fontWeight:'800', fontSize:'1.3em'}}>Ticket Description:</strong> <p style={{fontWeight:350}}>{this.state.item_description}</p>{" "}
+            <strong style={{fontWeight:'800', fontSize:'1.3em'}}>Ticket Description:</strong> <p style={{fontWeight:350}}>{this.state.itemDescription}</p>{" "}
           </h3>
         </div>
       </>
