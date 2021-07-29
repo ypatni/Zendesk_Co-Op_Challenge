@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Card from "./UI/Card";
+import './Button.css'
 import {
   BrowserRouter as Router,
   Link,
@@ -142,6 +143,22 @@ class Tickets extends Component {
         }
       );
   };
+  ticketIDInfo = () =>{
+    console.log('test');
+    const requestOptions = {
+      method: "GET",
+
+    };
+
+    fetch(
+      "https://faq1slxbph.execute-api.us-east-1.amazonaws.com/dev/tickets/1",
+      requestOptions
+    )
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          console.log(result);});
+  }
 
   render() {
     const { error, isLoaded, items } = this.state;
@@ -153,13 +170,17 @@ class Tickets extends Component {
       //body.cursor = this.state.cursor
       return (
         <>
-          <h3>{this.state.before_link}</h3>
-          <h3>{this.state.after_cursor}</h3>
-          { !this.state.isFirstPage &&
-          <button onClick={this.requestPreviousPost}> Back</button>}
+          <h1 className= 'h1'style= {{textAlign: 'center', fontWeight:'bolder'}}>Ticket Manager </h1>
+          <button onClick={this.ticketIDInfo}> Ticket Infor</button>
+          <div style={{display: 'flex', justifyContent: 'center',alignItems: 'center', paddingBottom: '30px'}}>
+
+          <button className= 'btn-primary ' style={{marginRight: '50px'}}onClick={this.requestPreviousPost}> Back</button>
+
 
           {this.state.hasMore &&
-          <button onClick={this.requestPost}> Next</button>}
+          <button className= 'btn-primary 'onClick={this.requestPost}> Next</button>}
+          </div>
+
 
           {/* <h1>{this.state.after_cursor}</h1> */}
           {items.map((item) => (
@@ -172,8 +193,8 @@ class Tickets extends Component {
                   }}
                   style={{ textDecoration: "none" }}
                 >
-                  <div style={{ color: "black" }}>
-                    <GoPrimitiveDot /> {item.id} {item.subject}
+                  <div style={{ color: "rgb(189, 217, 215)" }}>
+                    Ticket {item.id}   :   {item.subject}
                   </div>
                 </Link>
               </div>
