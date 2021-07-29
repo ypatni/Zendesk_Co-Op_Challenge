@@ -6,7 +6,6 @@ const NotFound = () => {
     <>
       <h4 style={{ textAlign: "center", fontWeight: "bolder" }}>
         Oh no! It looks like something went wrong!
-
       </h4>
     </>
   );

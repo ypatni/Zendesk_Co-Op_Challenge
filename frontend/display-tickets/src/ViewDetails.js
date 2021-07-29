@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, useLocation, Link } from "react-router-dom";
 import { Form, Card, Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import "./Parts.css";
+import "./Design.css";
 import PropTypes from "prop-types";
-import DetailsCard from "./DetailsCard";
+
 class ViewDetails extends Component {
   constructor(props) {
     super(props);
@@ -63,10 +63,9 @@ class ViewDetails extends Component {
     } else {
     return (
       <>
-      <h1 style={{ display: 'flex', justifyContent: 'center',alignItems: 'center' }}>Ticket Information</h1>
+      <h1 className='item-center'>Ticket Information</h1>
         <div
-          className="expense-item__description"
-          style={{ display: 'flex', justifyContent: 'center',alignItems: 'center' }}
+          className=" item-center body-item__description"
         >
           <h2>
             {" "}
@@ -74,8 +73,7 @@ class ViewDetails extends Component {
           </h2>
         </div>
         <div
-          className="expense-item__description"
-          style={{ display: 'flex', justifyContent: 'center',alignItems: 'center' }}
+          className="body-item__description item-center"
         >
           <h2>
             {" "}
@@ -83,15 +81,14 @@ class ViewDetails extends Component {
           </h2>
         </div>
         <div
-          className="expense-item__description"
-          style={{ display: 'flex', justifyContent: 'center',alignItems: 'center' }}
+          className="body-item__description item-center"
         >
           <h2>
             {" "}
             <strong>Assignee ID : </strong> {this.state.assignee_id}
           </h2>
         </div>
-        <div style={{display: 'flex', justifyContent: 'center',alignItems: 'center', paddingLeft: '18%', paddingRight: '18%'}} >
+        <div className = 'item-center description-padding' >
           <h3 style={{  justifyContent: 'center', fontWeight: 500 }}>
             <strong style={{fontWeight:'800', fontSize:'1.3em'}}>Ticket Description:</strong> <p style={{fontWeight:350}}>{this.state.item_description}</p>{" "}
           </h3>

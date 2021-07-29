@@ -20,7 +20,7 @@ import {
 } from "semantic-ui-react";
 
 import contacts from "./file_name.json";
-import "./Parts.css";
+import "./Design.css";
 class Tickets extends Component {
   constructor(props) {
     super(props);
@@ -266,11 +266,11 @@ class Tickets extends Component {
 
           {/* <h1>{this.state.after_cursor}</h1> */}
           {items.map((item) => (
-            <Card className="expense-item">
-              <div className="expense-item__description">
+            <Card className="body-item">
+              <div className="body-item__description">
                 <Link
                   to={{
-                    pathname: `/view-answer/${item.id}`,
+                    pathname: `/view-ticket/${item.id}`,
                     state: { items: item },
                   }}
                   style={{ textDecoration: "none" }}
