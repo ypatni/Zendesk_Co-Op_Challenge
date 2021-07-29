@@ -17,3 +17,4 @@ def test_get_ticket_by_id_handler():
         event, {}
     )
     assert response['statusCode'] == 200
+
