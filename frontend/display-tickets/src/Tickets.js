@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Card from "./UI/Card";
-import './Button.css'
+import "./Button.css";
 import {
   BrowserRouter as Router,
   Link,
@@ -25,15 +25,17 @@ class Tickets extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      totalTickets: 0,
+      ticketsOnCurrentPage: 0,
       isFirstPage: true,
       hasMore: true,
       error: null,
       isLoaded: false,
       items: [],
-      after_cursor: '',
-      before_cursor: '',
-      after_link: '',
-      before_link: '',
+      after_cursor: "",
+      before_cursor: "",
+      after_link: "",
+      before_link: "",
     };
   }
   componentDidMount() {
@@ -49,21 +51,32 @@ class Tickets extends Component {
       .then((res) => res.json())
       .then(
         (result) => {
-          console.log(result.links);
-          this.setState({
-            isLoaded: true,
-            isFirstPage: false,
-            items: result.tickets,
-            after_cursor: result.meta.after_cursor,
-            before_cursor: result.meta.before_cursor,
-            after_link: result.links.next,
-            before_link: result.links.prev,
-          });
+          console.log(result);
+          if (result.error) {
+            this.setState({
+              error: result.error,
+            });
+          } else {
+            console.log("test1");
+
+            this.setState({
+              isLoaded: true,
+              isFirstPage: false,
+              items: result.tickets.tickets,
+              after_cursor: result.tickets.meta.after_cursor,
+              before_cursor: result.tickets.meta.before_cursor,
+              after_link: result.tickets.links.next,
+              before_link: result.tickets.links.prev,
+              totalTickets: result.info.count.value,
+              ticketsOnCurrentPage: result.tickets.tickets.length,
+            });
+          }
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
         // exceptions from actual bugs in components.
         (error) => {
+          console.log(error);
           this.setState({
             isLoaded: true,
             error,
@@ -71,10 +84,13 @@ class Tickets extends Component {
         }
       );
   }
+  topFunction = () =>{
+    document.documentElement.scrollTop  = 0;
+  }
   requestPost = () => {
     const requestOptions = {
       method: "POST",
-      body: JSON.stringify({ cursor: this.state.after_link  }),
+      body: JSON.stringify({ cursor: this.state.after_link }),
     };
 
     fetch(
@@ -84,17 +100,29 @@ class Tickets extends Component {
       .then((res) => res.json())
       .then(
         (result) => {
-          console.log(result.links);
-          this.setState({
-            isFirstPage: false,
-            hasMore:  result.meta.has_more,
-            isLoaded: true,
-            after_cursor: result.meta.after_cursor,
-            before_cursor: result.meta.before_cursor,
-            items: result.tickets,
-            after_link: result.links.next,
-            before_link: result.links.prev,
-          });
+          console.log(result);
+          if (result.error) {
+            this.setState({
+              error: result.error,
+            });
+          } else {
+            console.log("test3");
+            console.log(result);
+            console.log(result.info);
+            console.log("test2");
+            this.setState({
+              isFirstPage: false,
+              hasMore: result.tickets.meta.has_more,
+              isLoaded: true,
+              items: result.tickets.tickets,
+              after_cursor: result.tickets.meta.after_cursor,
+              before_cursor: result.tickets.meta.before_cursor,
+              after_link: result.tickets.links.next,
+              before_link: result.tickets.links.prev,
+              totalTickets: result.info.count.value,
+              ticketsOnCurrentPage: result.tickets.tickets.length,
+            });
+          }
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
@@ -110,7 +138,7 @@ class Tickets extends Component {
   requestPreviousPost = () => {
     const requestOptions = {
       method: "POST",
-      body: JSON.stringify({ cursor: this.state.before_link  }),
+      body: JSON.stringify({ cursor: this.state.before_link }),
     };
 
     fetch(
@@ -121,16 +149,24 @@ class Tickets extends Component {
       .then(
         (result) => {
           console.log(result.links);
-          this.setState({
-            isFirstPage: true,
-            hasMore:  result.meta.has_more,
-            isLoaded: true,
-            after_cursor: result.meta.after_cursor,
-            before_cursor: result.meta.before_cursor,
-            items: result.tickets,
-            after_link: result.links.next,
-            before_link: result.links.prev,
-          });
+          if (result.error) {
+            this.setState({
+              error: result.error,
+            });
+          } else {
+            this.setState({
+              isFirstPage: true,
+              hasMore: result.tickets.meta.has_more,
+              isLoaded: true,
+              items: result.tickets.tickets,
+              after_cursor: result.tickets.meta.after_cursor,
+              before_cursor: result.tickets.meta.before_cursor,
+              after_link: result.tickets.links.next,
+              before_link: result.tickets.links.prev,
+              totalTickets: result.info.count.value,
+              ticketsOnCurrentPage: result.tickets.tickets.length,
+            });
+          }
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
@@ -143,44 +179,90 @@ class Tickets extends Component {
         }
       );
   };
-  ticketIDInfo = () =>{
-    console.log('test');
-    const requestOptions = {
-      method: "GET",
-
-    };
-
-    fetch(
-      "https://faq1slxbph.execute-api.us-east-1.amazonaws.com/dev/tickets/1",
-      requestOptions
-    )
-      .then((res) => res.json())
-      .then(
-        (result) => {
-          console.log(result);});
-  }
 
   render() {
     const { error, isLoaded, items } = this.state;
     if (error) {
-      return <div>Error: {error.message}</div>;
+      return (
+        <>
+          <div>
+            <h1
+              style={{
+                textAlign: "center",
+                fontWeight: "bolder",
+                paddingBottom: "40px",
+              }}
+            >
+              Ticket Information
+            </h1>
+          </div>
+
+          <h4 style={{ textAlign: "center", fontWeight: "bolder" }}>
+            Oh no! It looks like something went wrong! Here's the error message
+            below:
+          </h4>
+          <h2
+            style={{
+              textAlign: "center",
+              fontWeight: "bolder",
+              fontFamily:
+                "Lucida Sans Typewriter,Lucida Console,monaco,Bitstream Vera Sans Mono,monospace",
+              color: "rgb(134, 129, 53)",
+            }}
+          >
+            Error: {error}
+          </h2>
+        </>
+      );
     } else if (!isLoaded) {
       return <div>Loading...</div>;
     } else {
       //body.cursor = this.state.cursor
       return (
         <>
-          <h1 className= 'h1'style= {{textAlign: 'center', fontWeight:'bolder'}}>Ticket Manager </h1>
-          <button onClick={this.ticketIDInfo}> Ticket Infor</button>
-          <div style={{display: 'flex', justifyContent: 'center',alignItems: 'center', paddingBottom: '30px'}}>
+          <h1
+            className="h1"
+            style={{ textAlign: "center", fontWeight: "bolder" }}
+          >
+            Ticket Manager{" "}
+          </h1>
 
-          <button className= 'btn-primary ' style={{marginRight: '50px'}}onClick={this.requestPreviousPost}> Back</button>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              paddingBottom: "30px",
+            }}
+          >
+            <button
+              className="btn-primary "
+              style={{ marginRight: "50px" }}
+              onClick={this.requestPreviousPost}
+            >
+              {" "}
+              Back
+            </button>
 
-
-          {this.state.hasMore &&
-          <button className= 'btn-primary 'onClick={this.requestPost}> Next</button>}
+            {this.state.hasMore && (
+              <button className="btn-primary " onClick={this.requestPost}>
+                {" "}
+                Next
+              </button>
+            )}
           </div>
-
+          <div
+            style={{
+              marginTop: "10px",
+              marginBottom: "1em",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <p><b>{this.state.totalTickets}</b> {" "} total Tickets.{" "}
+            <b>{this.state.ticketsOnCurrentPage}</b> tickets on this page.</p>
+          </div>
 
           {/* <h1>{this.state.after_cursor}</h1> */}
           {items.map((item) => (
@@ -194,12 +276,37 @@ class Tickets extends Component {
                   style={{ textDecoration: "none" }}
                 >
                   <div style={{ color: "rgb(189, 217, 215)" }}>
-                    Ticket {item.id}   :   {item.subject}
+                    Ticket {item.id} : {item.subject}
                   </div>
                 </Link>
               </div>
             </Card>
           ))}
+                    <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              paddingBottom: "50px",
+              paddingTop: '30px'
+            }}
+          >
+           { this.state.hasMore &&  (<button
+              className="btn-primary "
+              style={{ marginRight: "50px" }}
+              onClick={this.scrollTop, this.requestPreviousPost}
+            >
+              {" "}
+              Back
+            </button>)}
+
+            {this.state.hasMore && (
+              <button className="btn-primary " onClick={this.requestPost}>
+                {" "}
+                Next
+              </button>
+            )}
+          </div>
         </>
       );
     }

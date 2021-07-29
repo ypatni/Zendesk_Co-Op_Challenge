@@ -12,9 +12,12 @@ class ViewDetails extends Component {
     this.state = {
       isLoaded: true,
       error: null,
+      item_title: '',
       item_id: '',
       item_description: '',
       item_org_id: '',
+      assignee_id: '',
+      requester_id: '',
       location: props.match,
     };
     //console.log(this.state.location.state.items.id);
@@ -32,21 +35,21 @@ class ViewDetails extends Component {
       .then((res) => res.json())
       .then(
         (result) => {
-          console.log(result.error)
-          console.log(result.links);
+          console.log(result)
+          console.log(result.links)
           if (result.error){
-            this.setState({
-              error: result.error
-            });
+            console.log(result.error.title)
+
           }
           else{
             this.setState({
               isLoaded: true,
               item_description: result.ticket.description,
-              item_id: result.ticket.id
+              item_id: result.ticket.id,
+              assignee_id: result.ticket.assignee_id,
+              requester_id: result.ticket.requester_id
             });
           }
-
         },
       );
 
@@ -60,7 +63,7 @@ class ViewDetails extends Component {
     } else {
     return (
       <>
-      <h1>Ticket Information</h1>
+      <h1 style={{ display: 'flex', justifyContent: 'center',alignItems: 'center' }}>Ticket Information</h1>
         <div
           className="expense-item__description"
           style={{ display: 'flex', justifyContent: 'center',alignItems: 'center' }}
@@ -69,14 +72,28 @@ class ViewDetails extends Component {
             {" "}
             <strong>I.D. : </strong> {this.state.item_id}
           </h2>
+        </div>
+        <div
+          className="expense-item__description"
+          style={{ display: 'flex', justifyContent: 'center',alignItems: 'center' }}
+        >
           <h2>
             {" "}
-            <strong>I.D. : </strong> {this.state.item_id}
+            <strong>Requester ID : </strong> {this.state.requester_id}
           </h2>
         </div>
-        <div style={{display: 'flex', justifyContent: 'center',alignItems: 'center', paddingLeft: '10rem', paddingRight: '10rem'}} >
+        <div
+          className="expense-item__description"
+          style={{ display: 'flex', justifyContent: 'center',alignItems: 'center' }}
+        >
+          <h2>
+            {" "}
+            <strong>Assignee ID : </strong> {this.state.assignee_id}
+          </h2>
+        </div>
+        <div style={{display: 'flex', justifyContent: 'center',alignItems: 'center', paddingLeft: '18%', paddingRight: '18%'}} >
           <h3 style={{  justifyContent: 'center', fontWeight: 500 }}>
-            <strong>Ticket Description:</strong> <p>{this.state.item_description}</p>{" "}
+            <strong style={{fontWeight:'800', fontSize:'1.3em'}}>Ticket Description:</strong> <p style={{fontWeight:350}}>{this.state.item_description}</p>{" "}
           </h3>
         </div>
       </>
