@@ -5,9 +5,9 @@ import { GoPrimitiveDot } from "react-icons/go";
 import Tickets from "./Tickets";
 import ViewDetails from "./ViewDetails";
 import { Container, Grid, Header, List } from "semantic-ui-react";
-
+import NotFound from './NotFound'
 import contacts from "./file_name.json";
-import "./Parts.css"
+import "./Design.css"
 
 const App = () => {
 
@@ -21,9 +21,9 @@ const App = () => {
         <div style = {{marginBottom: 10}}></div>
         <Router>
         <Switch>
-
-          <Route exact path="/view-answer/:id" component={ViewDetails} />
+          <Route exact path="/view-ticket/:id" component={ViewDetails} />
           <Route exact path="/" component={Tickets} />
+          <Route component={NotFound} />
         </Switch>
         </Router>
       </div>
