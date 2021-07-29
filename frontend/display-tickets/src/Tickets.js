@@ -41,7 +41,7 @@ class Tickets extends Component {
   componentDidMount() {
     const requestOptions = {
       method: "POST",
-      body: JSON.stringify({ cursor: this.state.after_link }),
+      body: JSON.stringify({ cursor: this.state.afterLink }),
     };
 
     fetch(
@@ -51,7 +51,8 @@ class Tickets extends Component {
       .then((res) => res.json())
       .then(
         (result) => {
-          console.log(result);
+          console.log('test0')
+          console.log(typeof result);
           if (result.error) {
             this.setState({
               error: result.error,
@@ -90,7 +91,7 @@ class Tickets extends Component {
   requestPost = () => {
     const requestOptions = {
       method: "POST",
-      body: JSON.stringify({ cursor: this.state.after_link }),
+      body: JSON.stringify({ cursor: this.state.afterLink }),
     };
 
     fetch(
@@ -138,7 +139,7 @@ class Tickets extends Component {
   requestPreviousPost = () => {
     const requestOptions = {
       method: "POST",
-      body: JSON.stringify({ cursor: this.state.before_link }),
+      body: JSON.stringify({ cursor: this.state.beforeLink }),
     };
 
     fetch(
