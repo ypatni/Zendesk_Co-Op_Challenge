@@ -8,7 +8,6 @@ class Tickets extends Component {
     this.state = {
       totalTickets: 0,
       ticketsOnCurrentPage: 0,
-      isFirstPage: true,
       hasMore: true,
       error: null,
       isLoaded: false,
@@ -43,7 +42,6 @@ class Tickets extends Component {
 
             this.setState({
               isLoaded: true,
-              isFirstPage: false,
               items: result.tickets.tickets,
               afterCursor: result.tickets.meta.after_cursor,
               beforeCursor: result.tickets.meta.before_cursor,
@@ -56,7 +54,7 @@ class Tickets extends Component {
         },
         // Note: it's important to handle errors here
         // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
+        // exceptions from actual bugs in components.˝
         (error) => {
           console.log(error);
           this.setState({
@@ -71,6 +69,10 @@ class Tickets extends Component {
       method: "POST",
       body: JSON.stringify({ cursor: this.state.afterLink }),
     };
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
 
     fetch(
       "https://faq1slxbph.execute-api.us-east-1.amazonaws.com/dev/tickets",
@@ -119,6 +121,10 @@ class Tickets extends Component {
       method: "POST",
       body: JSON.stringify({ cursor: this.state.beforeLink }),
     };
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
 
     fetch(
       "https://faq1slxbph.execute-api.us-east-1.amazonaws.com/dev/tickets",
@@ -134,7 +140,6 @@ class Tickets extends Component {
             });
           } else {
             this.setState({
-              isFirstPage: true,
               hasMore: result.tickets.meta.has_more,
               isLoaded: true,
               items: result.tickets.tickets,
@@ -147,9 +152,6 @@ class Tickets extends Component {
             });
           }
         },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
         (error) => {
           this.setState({
             isLoaded: true,
@@ -158,7 +160,6 @@ class Tickets extends Component {
         }
       );
   };
-
   render() {
     const { error, isLoaded, items } = this.state;
     if (error) {
