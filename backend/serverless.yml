@@ -4,6 +4,11 @@ provider:
   name: aws
   runtime: python3.7
 
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - ssm:*
+      Resource: "arn:aws:ssm:us-east-1:*:*"
 
 functions:
   getTickets:

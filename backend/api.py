@@ -1,6 +1,21 @@
+import boto3
 import requests
 
 class ZendeskApiCallHelper:
+    @staticmethod
+    def get_token():
+        try:
+            client = boto3.client('ssm', 'us-east-1')
+            response = client.get_parameter(
+                Name='zendesk-token',
+                WithDecryption=False
+            )
+            return response['Parameter']['Value']
+        except Exception as error:
+            print(error)
+            raise Exception('error getting token')
+
+
     @staticmethod
     def get_total_tickets_count():
         """Method to call API to get total number of tickets"""
@@ -25,5 +40,6 @@ class ZendeskApiCallHelper:
 
     @staticmethod
     def _get_api_call(endpoint):
-        return requests.get(endpoint, auth=requests.auth.HTTPBasicAuth('yjp5077@psu.edu/token', 'F3rYO1svfWLHUuuePCjARgkjr1vl5pxShOj1Bjma')).json()
+        token = ZendeskApiCallHelper.get_token()
+        return requests.get(endpoint, auth=requests.auth.HTTPBasicAuth('yjp5077@psu.edu/token', token)).json()
 
