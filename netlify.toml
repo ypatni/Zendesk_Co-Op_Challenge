@@ -1,2 +1,2 @@
 [build]
-command = "cd frontend/display-tickets && npm run build && cp -r build/ ../../build/ && cd ../../"
+command = "ls"
