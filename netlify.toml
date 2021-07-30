@@ -1,2 +1,2 @@
 [build]
-command = "CI= npm run build"
+command = "cd frontend/display-tickets && npm run build && cp -r build/ ../../build/ && cd ../../"
