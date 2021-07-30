@@ -1,5 +1,7 @@
 # **Zendesk Co-Op Challenge**
 
+## To view the project, click [here](https://yash-zendesk-test.netlify.app/)
+
 ## Install this before you get started
 
 ```
