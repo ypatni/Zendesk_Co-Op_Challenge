@@ -54,8 +54,8 @@ class ViewDetails extends Component {
         <>
           <h1 className="item-center">Ticket Information</h1>
           <div
-            className="item-center"
-            style={{ fontSize: "1.1em", marginBottom: "2px" }}
+            className="item-center id-attributes"
+
           >
             <h3>
               {" "}
@@ -63,8 +63,8 @@ class ViewDetails extends Component {
             </h3>
           </div>
           <div
-            className="item-center"
-            style={{ fontSize: "1.1em", marginBottom: "2px" }}
+            className="item-center id-attributes"
+
           >
             <h3>
               {" "}
@@ -72,8 +72,8 @@ class ViewDetails extends Component {
             </h3>
           </div>
           <div
-            className="item-center"
-            style={{ fontSize: "1.1em", marginBottom: "2px" }}
+            className="item-center id-attributes"
+
           >
             <h3>
               {" "}
@@ -81,8 +81,8 @@ class ViewDetails extends Component {
             </h3>
           </div>
           <div
-            className="item-center"
-            style={{ fontSize: "1.1em", marginBottom: "2px" }}
+            className="item-center id-attributes"
+
           >
             <h3>
               {" "}
