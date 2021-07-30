@@ -1,2 +1,3 @@
 [build]
-command = "ls"
+base = "frontend/display-tickets/"
+command = "npm run build"
