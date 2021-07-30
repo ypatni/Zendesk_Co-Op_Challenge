@@ -14,7 +14,7 @@ functions:
          method: post
          cors: true
   getTicket:
-    handler: handler.get_ticket
+    handler: handler.get_ticket_by_id
     events:
      - http:
          path: tickets/{id}

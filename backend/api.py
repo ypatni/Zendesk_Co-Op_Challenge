@@ -16,7 +16,7 @@ class ZendeskApiCallHelper:
         return {'tickets':tickets_response, 'info': count_response}
 
     @staticmethod
-    def get_ticket(id):
+    def get_ticket_by_id(id):
         return ZendeskApiCallHelper._get_api_call(f"https://zcctest.zendesk.com/api/v2/tickets/{id}")
 
 

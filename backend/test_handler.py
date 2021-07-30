@@ -1,5 +1,5 @@
 from handler import get_tickets
-from handler import get_ticket
+from handler import get_ticket_by_id
 from pytest_mock import MockerFixture
 from api import ZendeskApiCallHelper
 
@@ -30,8 +30,8 @@ def test_get_tickets_handler_success(mocker: MockerFixture) -> None:
  'statusCode': 200}
 
 def test_get_ticket_success(mocker: MockerFixture) -> None:
-    mocked_function = mocker.patch.object(ZendeskApiCallHelper, "get_ticket", return_value={})
-    response = get_ticket(
+    mocked_function = mocker.patch.object(ZendeskApiCallHelper, "get_ticket_by_id", return_value={})
+    response = get_ticket_by_id(
         {'resource': '/tickets/{id}', 'path': '/tickets/1', 'httpMethod': 'GET',
          'headers': {'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'Accept-Language': 'en-US,en;q=0.9',
                      'CloudFront-Forwarded-Proto': 'https', 'CloudFront-Is-Desktop-Viewer': 'true',
@@ -86,8 +86,8 @@ def test_get_ticket_success(mocker: MockerFixture) -> None:
 
 def test_get_ticket_success(mocker: MockerFixture) -> None:
     mock_response = mocker.MagicMock()
-    mocked_function = mocker.patch.object(ZendeskApiCallHelper, "get_ticket", return_value=mock_response)
-    response = get_ticket(
+    mocked_function = mocker.patch.object(ZendeskApiCallHelper, "get_ticket_by_id", return_value=mock_response)
+    response = get_ticket_by_id(
         {'resource': '/tickets/{id}', 'path': '/tickets/1', 'httpMethod': 'GET',
          'headers': {'Accept': '*/*', 'Accept-Encoding': 'gzip, deflate, br', 'Accept-Language': 'en-US,en;q=0.9',
                      'CloudFront-Forwarded-Proto': 'https', 'CloudFront-Is-Desktop-Viewer': 'true',
