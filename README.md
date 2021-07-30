@@ -5,6 +5,7 @@
 ### **Before you get started, install:**
 
 ```
+pip install boto3
 pip install pytest
 pip install pytest-mock
 npm i -g serverless
@@ -19,6 +20,7 @@ npm i -g serverless
 - Deployed to the AWS API Gateway
 - All logs get displayed in CloudWatch
 - No persistance
+- API token moved to AWS Systems Manager for greater security
 
 ### To run the tests run:
 ```
