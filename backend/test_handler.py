@@ -6,6 +6,7 @@ from api import ZendeskApiCallHelper
 import json
 
 def test_get_tickets_handler_error(mocker: MockerFixture) -> None:
+    """Test get tickets handler for incorrect response"""
     mock_response = mocker.MagicMock()
     mocked_function = mocker.patch.object(ZendeskApiCallHelper, "get_tickets", return_value=mock_response)
     response = get_tickets(
@@ -17,6 +18,7 @@ def test_get_tickets_handler_error(mocker: MockerFixture) -> None:
     assert response == {'statusCode': 500, 'headers': {'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Credentials': True}, 'body': '"Object of type MagicMock is not JSON serializable"'}
 
 def test_get_tickets_handler_success(mocker: MockerFixture) -> None:
+    """Test get tickets handler for correct response"""
     mocked_function = mocker.patch.object(ZendeskApiCallHelper, "get_tickets", return_value={})
     response = get_tickets(
         {
@@ -30,6 +32,7 @@ def test_get_tickets_handler_success(mocker: MockerFixture) -> None:
  'statusCode': 200}
 
 def test_get_ticket_success(mocker: MockerFixture) -> None:
+    """Test get single ticket info handler for correct response"""
     mocked_function = mocker.patch.object(ZendeskApiCallHelper, "get_ticket_by_id", return_value={})
     response = get_ticket_by_id(
         {'resource': '/tickets/{id}', 'path': '/tickets/1', 'httpMethod': 'GET',
@@ -84,7 +87,8 @@ def test_get_ticket_success(mocker: MockerFixture) -> None:
                                     'Access-Control-Allow-Origin': '*'},
                         'statusCode': 200}
 
-def test_get_ticket_success(mocker: MockerFixture) -> None:
+def test_get_ticket_error(mocker: MockerFixture) -> None:
+    """Test get single ticket info handler for incorrect response"""
     mock_response = mocker.MagicMock()
     mocked_function = mocker.patch.object(ZendeskApiCallHelper, "get_ticket_by_id", return_value=mock_response)
     response = get_ticket_by_id(

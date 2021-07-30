@@ -3,10 +3,12 @@ import requests
 class ZendeskApiCallHelper:
     @staticmethod
     def get_total_tickets_count():
+        """Method to call API to get total number of tickets"""
         return ZendeskApiCallHelper._get_api_call(f"https://zcctest.zendesk.com/api/v2/tickets/count")
 
     @staticmethod
     def get_tickets(cursor_link):
+        """Method to get tickets for a page in increments of 25. Uses a next page link to identify page."""
         count_response = ZendeskApiCallHelper.get_total_tickets_count()
 
         if not cursor_link:
@@ -17,6 +19,7 @@ class ZendeskApiCallHelper:
 
     @staticmethod
     def get_ticket_by_id(id):
+        """Method to call API to get a particular ticket based on ID"""
         return ZendeskApiCallHelper._get_api_call(f"https://zcctest.zendesk.com/api/v2/tickets/{id}")
 
 
