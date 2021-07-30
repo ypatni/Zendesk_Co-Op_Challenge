@@ -31,7 +31,7 @@ npm start
 
 * ## 2 AWS Lambda Functions:
   * ### Wrapper for the /get_tickets Zendesk API call.
-  * ### Wrapper for the /get_ticket Zendesk API call.
+  * ### Wrapper for the /get_ticket_by_id Zendesk API call.
 
 ### Deployed to the AWS API Gateway
 ### All logs get diaplyed in CloudWatch

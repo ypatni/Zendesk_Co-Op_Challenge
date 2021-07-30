@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import "./Button.css";
-import {
-  Link
-} from "react-router-dom";
-
+import { Link } from "react-router-dom";
 import "./Design.css";
 class Tickets extends Component {
   constructor(props) {
@@ -35,7 +32,7 @@ class Tickets extends Component {
       .then((res) => res.json())
       .then(
         (result) => {
-          console.log('test0')
+          console.log("test0");
           console.log(typeof result);
           if (result.error) {
             this.setState({
@@ -242,8 +239,10 @@ class Tickets extends Component {
               alignItems: "center",
             }}
           >
-            <p><b>{this.state.totalTickets}</b> {" "} total Tickets.{" "}
-            <b>{this.state.ticketsOnCurrentPage}</b> tickets on this page.</p>
+            <p>
+              <b>{this.state.totalTickets}</b> total Tickets.{" "}
+              <b>{this.state.ticketsOnCurrentPage}</b> tickets on this page.
+            </p>
           </div>
 
           {/* <h1>{this.state.after_cursor}</h1> */}
@@ -264,23 +263,25 @@ class Tickets extends Component {
               </div>
             </div>
           ))}
-                    <div
+          <div
             style={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
               paddingBottom: "50px",
-              paddingTop: '30px'
+              paddingTop: "30px",
             }}
           >
-           { this.state.hasMore &&  (<button
-              className="btn-primary "
-              style={{ marginRight: "50px" }}
-              onClick={this.requestPreviousPost}
-            >
-              {" "}
-              Back
-            </button>)}
+            {this.state.hasMore && (
+              <button
+                className="btn-primary "
+                style={{ marginRight: "50px" }}
+                onClick={this.requestPreviousPost}
+              >
+                {" "}
+                Back
+              </button>
+            )}
 
             {this.state.hasMore && (
               <button className="btn-primary " onClick={this.requestPost}>

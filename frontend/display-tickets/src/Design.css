@@ -38,11 +38,11 @@
   border-color: #4867ca86 !important;
 }
 .item-center {
-  display: flex ;
+  display: flex;
   justify-content: center;
   align-items: center;
 }
-.description-padding{
+.description-padding {
   padding-left: 18%;
   padding-right: 18%;
 }

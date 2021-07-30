@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import "./Design.css";
-
-
 class ViewDetails extends Component {
   constructor(props) {
     super(props);
@@ -9,14 +7,13 @@ class ViewDetails extends Component {
     this.state = {
       isLoaded: true,
       error: null,
-      itemID: '',
-      itemDescription: '',
-      assigneeID: '',
-      requesterID: '',
-      ticketFormID: '',
+      itemID: "",
+      itemDescription: "",
+      assigneeID: "",
+      requesterID: "",
+      ticketFormID: "",
       location: props.match,
     };
-    //console.log(this.state.location.state.items.id);
   }
   componentDidMount() {
     console.log("test");
@@ -29,81 +26,80 @@ class ViewDetails extends Component {
       requestOptions
     )
       .then((res) => res.json())
-      .then(
-        (result) => {
-          console.log(result)
-          console.log(result.links)
-          if (result.error){
-            console.log(result.error.title)
-
-          }
-          else{
-            this.setState({
-              isLoaded: true,
-              itemDescription: result.ticket.description,
-              itemID: result.ticket.id,
-              assigneeID: result.ticket.assignee_id,
-              requesterID: result.ticket.requester_id,
-              ticketFormID: result.ticket.ticket_form_id,
-            });
-          }
-        },
-      );
-
+      .then((result) => {
+        console.log(result);
+        console.log(result.links);
+        if (result.error) {
+          console.log(result.error.title);
+        } else {
+          this.setState({
+            isLoaded: true,
+            itemDescription: result.ticket.description,
+            itemID: result.ticket.id,
+            assigneeID: result.ticket.assignee_id,
+            requesterID: result.ticket.requester_id,
+            ticketFormID: result.ticket.ticket_form_id,
+          });
+        }
+      });
   }
   render() {
-    const { error, isLoaded} = this.state;
+    const { error, isLoaded } = this.state;
     if (error) {
       return <div>Error: {error}</div>;
     } else if (!isLoaded) {
       return <div>Loading...</div>;
     } else {
-    return (
-      <>
-      <h1 className='item-center'>Ticket Information</h1>
-        <div
-          className="item-center"
-          style={{fontSize: '1.1em', marginBottom: '2px'}}
-        >
-          <h3 >
-            {" "}
-            <strong>I.D. : </strong> {this.state.itemID}
-          </h3>
-        </div>
-        <div
-          className="item-center"
-          style={{fontSize: '1.1em', marginBottom: '2px'}}
-        >
-          <h3>
-            {" "}
-            <strong>Requester ID : </strong> {this.state.requesterID}
-          </h3>
-        </div>
-        <div
-          className="item-center"
-          style={{fontSize: '1.1em', marginBottom: '2px'}}
-        >
-          <h3>
-            {" "}
-            <strong>Assignee ID : </strong> {this.state.assigneeID}
-          </h3>
-        </div>
-        <div
-          className="item-center"
-          style={{fontSize: '1.1em', marginBottom: '2px'}}
-        >
-          <h3>
-            {" "}
-            <strong>Ticket Form ID : </strong> {this.state.ticketFormID}
-          </h3>
-        </div>
-        <div className = 'item-center description-padding' >
-          <h3 style={{  justifyContent: 'center', fontWeight: 500 }}>
-            <strong style={{fontWeight:'800', fontSize:'1.3em'}}>Ticket Description:</strong> <p style={{fontWeight:350}}>{this.state.itemDescription}</p>{" "}
-          </h3>
-        </div>
-      </>
-    );}
+      return (
+        <>
+          <h1 className="item-center">Ticket Information</h1>
+          <div
+            className="item-center"
+            style={{ fontSize: "1.1em", marginBottom: "2px" }}
+          >
+            <h3>
+              {" "}
+              <strong>I.D. : </strong> {this.state.itemID}
+            </h3>
+          </div>
+          <div
+            className="item-center"
+            style={{ fontSize: "1.1em", marginBottom: "2px" }}
+          >
+            <h3>
+              {" "}
+              <strong>Requester ID : </strong> {this.state.requesterID}
+            </h3>
+          </div>
+          <div
+            className="item-center"
+            style={{ fontSize: "1.1em", marginBottom: "2px" }}
+          >
+            <h3>
+              {" "}
+              <strong>Assignee ID : </strong> {this.state.assigneeID}
+            </h3>
+          </div>
+          <div
+            className="item-center"
+            style={{ fontSize: "1.1em", marginBottom: "2px" }}
+          >
+            <h3>
+              {" "}
+              <strong>Ticket Form ID : </strong> {this.state.ticketFormID}
+            </h3>
+          </div>
+          <div className="item-center description-padding">
+            <h3 style={{ justifyContent: "center", fontWeight: 500 }}>
+              <strong style={{ fontWeight: "800", fontSize: "1.3em" }}>
+                Ticket Description:
+              </strong>{" "}
+              <p style={{ fontWeight: 350 }}>{this.state.itemDescription}</p>{" "}
+            </h3>
+          </div>
+        </>
+      );
+    }
   }
 }
 
