@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, useLocation, Link } from "react-router-dom";
-import { Form, Card, Container, Row, Col } from "react-bootstrap";
-import Button from "react-bootstrap/Button";
 import "./Design.css";
-import PropTypes from "prop-types";
+
 
 class ViewDetails extends Component {
   constructor(props) {

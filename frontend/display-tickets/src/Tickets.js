@@ -1,25 +1,9 @@
 import React, { Component } from "react";
-import Card from "./UI/Card";
 import "./Button.css";
 import {
-  BrowserRouter as Router,
-  Link,
-  Redirect,
-  useLocation,
-  withRouter,
-  history as useHistory,
+  Link
 } from "react-router-dom";
-import { GoPrimitiveDot } from "react-icons/go";
 
-import {
-  Container,
-  Grid,
-  Header,
-  List,
-  SearchResults,
-} from "semantic-ui-react";
-
-import contacts from "./file_name.json";
 import "./Design.css";
 class Tickets extends Component {
   constructor(props) {
@@ -84,9 +68,6 @@ class Tickets extends Component {
           });
         }
       );
-  }
-  topFunction = () =>{
-    document.documentElement.scrollTop  = 0;
   }
   requestPost = () => {
     const requestOptions = {
@@ -267,7 +248,7 @@ class Tickets extends Component {
 
           {/* <h1>{this.state.after_cursor}</h1> */}
           {items.map((item) => (
-            <Card className="body-item">
+            <div className="body-item">
               <div className="body-item__description">
                 <Link
                   to={{
@@ -281,7 +262,7 @@ class Tickets extends Component {
                   </div>
                 </Link>
               </div>
-            </Card>
+            </div>
           ))}
                     <div
             style={{
@@ -295,7 +276,7 @@ class Tickets extends Component {
            { this.state.hasMore &&  (<button
               className="btn-primary "
               style={{ marginRight: "50px" }}
-              onClick={this.scrollTop, this.requestPreviousPost}
+              onClick={this.requestPreviousPost}
             >
               {" "}
               Back
