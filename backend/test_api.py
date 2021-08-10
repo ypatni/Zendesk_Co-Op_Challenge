@@ -8,7 +8,7 @@ def test_get_ticket_count(mocker: MockerFixture) -> None:
     mocked_function = mocker.patch.object(ZendeskApiCallHelper, "_get_api_call", return_value=mock_response)
     assert ZendeskApiCallHelper.get_total_tickets_count() == mock_response
     assert mocked_function.call_count == 1
-    assert mocked_function.call_args[0][0] == "https://zcctest.zendesk.com/api/v2/tickets/count"
+    assert mocked_function.call_args[0][0] == "https://zcctestsupport.zendesk.com/api/v2/tickets/count"
 
 def test_get_ticket_by_id(mocker: MockerFixture) -> None:
     """Testing get ticket by ID API call"""
@@ -16,7 +16,7 @@ def test_get_ticket_by_id(mocker: MockerFixture) -> None:
     mocked_function = mocker.patch.object(ZendeskApiCallHelper, "_get_api_call", return_value=mock_response)
     assert ZendeskApiCallHelper.get_ticket(3) == mock_response
     assert mocked_function.call_count == 1
-    assert mocked_function.call_args[0][0] == "https://zcctest.zendesk.com/api/v2/tickets/3"
+    assert mocked_function.call_args[0][0] == "https://zcctestsupport.zendesk.com/api/v2/tickets/3"
 
 def test_get_tickets(mocker: MockerFixture) -> None:
     """Test get tickets function for an input link"""
@@ -37,4 +37,4 @@ def test_get_tickets_none(mocker: MockerFixture) -> None:
     mocked_api_function = mocker.patch.object(ZendeskApiCallHelper, "_get_api_call", return_value=mock_response_api_call)
     assert ZendeskApiCallHelper.get_total_tickets_count() == mock_response_count
     assert ZendeskApiCallHelper.get_tickets(None)['tickets'] == mock_response_api_call
-    assert mocked_api_function.call_args[0][0] == 'https://zcctest.zendesk.com/api/v2/tickets.json?page[size]=25'
+    assert mocked_api_function.call_args[0][0] == 'https://zcctestsupport.zendesk.com/api/v2/tickets.json?page[size]=25'

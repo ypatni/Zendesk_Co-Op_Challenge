@@ -19,7 +19,7 @@ class ZendeskApiCallHelper:
     @staticmethod
     def get_total_tickets_count():
         """Method to call API to get total number of tickets"""
-        return ZendeskApiCallHelper._get_api_call(f"https://zcctest.zendesk.com/api/v2/tickets/count")
+        return ZendeskApiCallHelper._get_api_call(f"https://zcctestsupport.zendesk.com/api/v2/tickets/count")
 
     @staticmethod
     def get_tickets(cursor_link):
@@ -27,7 +27,7 @@ class ZendeskApiCallHelper:
         count_response = ZendeskApiCallHelper.get_total_tickets_count()
 
         if not cursor_link:
-            cursor_link = 'https://zcctest.zendesk.com/api/v2/tickets.json?page[size]=25'
+            cursor_link = 'https://zcctestsupport.zendesk.com/api/v2/tickets.json?page[size]=25'
 
         tickets_response = ZendeskApiCallHelper._get_api_call(cursor_link)
         return {'tickets':tickets_response, 'info': count_response}
@@ -35,7 +35,7 @@ class ZendeskApiCallHelper:
     @staticmethod
     def get_ticket_by_id(id):
         """Method to call API to get a particular ticket based on ID"""
-        return ZendeskApiCallHelper._get_api_call(f"https://zcctest.zendesk.com/api/v2/tickets/{id}")
+        return ZendeskApiCallHelper._get_api_call(f"https://zcctestsupport.zendesk.com/api/v2/tickets/{id}")
 
 
     @staticmethod
